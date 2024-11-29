@@ -5,12 +5,20 @@
 # include <iostream>
 # include "Contact.hpp"
 
+#define	GREEN	"\033[1;92m"
+#define	RED		"\033[1;91m"
+#define	RESET	"\033[0;0m"
+#define	MAX_CONTACT	2
+
+std::string	get_index(const std::string title);
+
 class PhoneBook{
 
 	private:
-		Contact	_list[8];
+		Contact	_list[MAX_CONTACT];
 		int		_index;
 		int		_count;
+
 	public:
 		PhoneBook();
 		void	add();
