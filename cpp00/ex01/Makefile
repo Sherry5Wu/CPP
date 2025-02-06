@@ -1,7 +1,7 @@
 NAME := phoneBook
 COMPILER := c++
 RM := rm -f
-FLAGS := -Wall -Wextra -Werror -std=c++11
+FLAGS := -Wall -Wextra -Werror -std=c++98
 
 GREEN = \033[1;92m
 RESET = \033[0;0m

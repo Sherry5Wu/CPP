@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/06 09:23:04 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/06 09:23:04 by jingwu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
@@ -12,7 +24,6 @@ class Contact{
 		std::string	_nickname;
 		std::string	_phone_number;
 		std::string	_darkest_secret;
-		// int			_index;
 		enum field{
 			FIRSTNAME,
 			LASTNAME,

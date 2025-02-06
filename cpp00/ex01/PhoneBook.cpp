@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 11:37:02 by jingwu            #+#    #+#             */
-/*   Updated: 2024/11/29 15:00:03 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/02/06 10:54:49 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,15 @@ void	PhoneBook::add(){
 			std::cout << RED << "The field can't be empty. Please enter again.\n"
 				<< RESET;
 			i--;
-			continue ; // do we need continue here?????
+			continue ;
 		}
 		else{
 			new_contact.add_new_contact(i, input);
 		}
 	}
 	_list[_index] = new_contact;
-	if (_index < MAX_CONTACT)
-		_index++;
-	// std::cout << "index=" << _index << std::endl;// for testing!!!!!!!!!!!!
-	_count += (_count > MAX_CONTACT ? 0 : 1);
+	_index = (_index + 1) % MAX_CONTACT;
+	_count += (_count >= MAX_CONTACT ? 0 : 1);
 }
 
 void	PhoneBook::search(){
@@ -61,15 +59,13 @@ void	PhoneBook::search(){
 			<< RESET;
 		return ;
 	}
-	std::cout << "_index=" << _index << std::endl;
-	for (i = 0; i < _index; i++){
+	for (i = 0; i < _count; i++){
 		std::cout << i + 1 << '|';
 		_list[i].print_short();
 	}
-	std::cout << GREEN << "Please enter the index (1~8) to see the full information: "
+	std::cout << GREEN << "Please enter the index (1~" << _count << ") to see the full information: "
 		<< RESET;
 	std::getline(std::cin, index);
-	// after testing remember to change 2 to "8"
 	if (index.length() != 1 || index.at(0) < '1' || index.at(0) > '8'
 		|| index.at(0) - '1' >= _count){
 		std::cout << RED << "Invalid index\n" << RESET;

@@ -1,21 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/06 09:22:52 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/06 09:22:52 by jingwu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 
 int main(int ac, char **av){
-	int	i;
-	int	j;
-
-	i = 1;
 	if (ac > 1){
-		while (i < ac){
-			j = 0;
-			while (av[i][j]){
+		for (int i = 1; i < ac; i++){
+			for (int j = 0; av[i][j]; j++){
 				if (std::isalpha(av[i][j]))
 					std::cout << (char)std::toupper(av[i][j]);
 				else
 					std::cout << av[i][j];
-				j++;
 			}
-			i++;
 		}
 		std::cout << std::endl;
 	} else

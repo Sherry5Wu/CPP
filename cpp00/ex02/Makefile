@@ -1,9 +1,9 @@
-NAME := megaphone.exe
+NAME := account
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++98
 RM := rm -f
 
-SRCS := megaphone.cpp
+SRCS := tests.cpp Account.cpp
 OBJS_DIR := obj
 OBJ := $(SRCS:.cpp=.o)
 OBJS := $(addprefix $(OBJS_DIR)/, $(OBJ))
