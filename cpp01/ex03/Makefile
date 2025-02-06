@@ -1,8 +1,8 @@
-NAME := zombie
+NAME := ex03
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+SRCS := main.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)
@@ -27,4 +27,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY all clean fclean re
