@@ -1,0 +1,2 @@
+The command to compare to files differences:
+	diff -u <(cut -d' ' -f2 out.log) <(cut -d' ' -f2 "19920104_091532.log")
