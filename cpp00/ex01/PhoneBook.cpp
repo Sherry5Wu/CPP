@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 11:37:02 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/06 10:54:49 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/02/06 14:37:52 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ void	PhoneBook::search(){
 		std::cout << i + 1 << '|';
 		_list[i].print_short();
 	}
-	std::cout << GREEN << "Please enter the index (1~" << _count << ") to see the full information: "
-		<< RESET;
-	std::getline(std::cin, index);
-	if (index.length() != 1 || index.at(0) < '1' || index.at(0) > '8'
-		|| index.at(0) - '1' >= _count){
+	while (true){
+		std::cout << GREEN << "Please enter the index (1~" << _count << ") to see the full information: "
+			<< RESET;
+		std::getline(std::cin, index);
+		if (index.length() == 1 && index.at(0) >= '1' && index.at(0) < '1' + _count){
+			break;
+		}
 		std::cout << RED << "Invalid index\n" << RESET;
-		return ;
-	}
+		}
 	_list[index.at(0) - '1'].print_long();
 }
