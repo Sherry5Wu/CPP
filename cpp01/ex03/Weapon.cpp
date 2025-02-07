@@ -1,12 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 11:25:02 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/06 11:25:03 by jingwu           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "Weapon.hpp"
 
+Weapon::Weapon(std::string type) : _type(type){
+	std::cout << "This is the constructor of Weapon" << std::endl;
+}
+
+// Here this->_type equals _type
+const std::string&	Weapon::getType(void) const{
+	return (this->_type);
+}
+
+void	Weapon::setType(const std::string& newType){
+	this->_type = newType;
+}

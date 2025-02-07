@@ -1,8 +1,8 @@
-NAME := ex02
+NAME := harl
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp
+SRCS := main.cpp Harl.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)

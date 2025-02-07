@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Contact.cpp                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 09:22:24 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/06 09:22:24 by jingwu           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Contact.hpp"
 
 Contact::Contact(){
@@ -34,7 +22,7 @@ void	Contact::print_prompt(int i){
 			std::cout << std::setw(15) << "Darkest secret: ";
 			break ;
 		default:
-			std::cout << "Invalid prompt\n";
+			std::cout << "Invalid promt\n";
 			break ;
 	}
 }
@@ -68,6 +56,7 @@ std::string	truncated_str(std::string str){
 }
 
 void	Contact::print_short(){
+	// std::cout << std::setw(10) << _index << "|";
 	std::cout << std::setw(10) << truncated_str(_first_name) << "|";
 	std::cout << std::setw(10) << truncated_str(_last_name) << "|";
 	std::cout << std::setw(10) << truncated_str(_nickname) << std::endl;

@@ -1,4 +1,4 @@
-NAME := zombie
+NAME := ex01
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 

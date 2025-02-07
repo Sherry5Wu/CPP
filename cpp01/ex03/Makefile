@@ -2,7 +2,7 @@ NAME := ex03
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp
+SRCS := main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)
