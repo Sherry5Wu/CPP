@@ -1,4 +1,4 @@
-NAME := ex04
+NAME := replace
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
@@ -27,4 +27,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY all clean fclean re
+.PHONY: all clean fclean re

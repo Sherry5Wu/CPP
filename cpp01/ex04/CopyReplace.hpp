@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   CopyReplace.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 08:18:47 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/10 08:18:47 by jingwu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COPYREPLACE_HPP
 # define COPYREPLACE_HPP
 
@@ -8,7 +20,8 @@
 
 class CopyReplace{
 	public:
-		CopyReplace(const std::string fileName, const std::string s1, const std::string s2);
+		CopyReplace(const std::string fileName, const std::string s1,
+			const std::string s2);
 		~CopyReplace();
 		bool	process();
 
@@ -22,4 +35,4 @@ class CopyReplace{
 		bool	replaceAndWriteFile();
 };
 
-#endif
+#endif // COPYREPLACE_HPP

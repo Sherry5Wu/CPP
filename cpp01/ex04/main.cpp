@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 08:18:53 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/10 08:18:53 by jingwu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <string>
 #include <iostream>
 #include "CopyReplace.hpp"
 
-int	main(int ac, std::string *av){
+int	main(int ac, char **av){
 	if (ac != 4)
 	{
 		std::cerr << "Error\nThe program takes and only takes 3 parameters\n";

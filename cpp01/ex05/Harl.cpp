@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 08:19:02 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/10 08:19:02 by jingwu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Harl.hpp"
 
 Harl::Harl(){
@@ -7,24 +19,24 @@ Harl::~Harl(){
 }
 
 // Private functions
-void	debug(){
+void	Harl::debug(){
 	std::cout << "[DEBUG] This message is from DEBUG, DEBUG, DEBUG" << std::endl;
 }
 
-void	info(){
+void	Harl::info(){
 	std::cout << "[INFO] This message is from INFO, INFO, INFO" << std::endl;
 }
 
-void	warning(){
+void	Harl::warning(){
 	std::cout << "[WARNING] This message is from WARNING, WARNING, WARNING" << std::endl;
 }
 
-void	error(){
+void	Harl::error(){
 	std::cout << "[ERROR] This message is from ERROR, ERROR, ERROR" << std::endl;
 }
 
 // Public funtion
-void	complain(std::string level){
+void	Harl::complain(std::string level){
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	// (Harl::*functions[4]) is a A pointer to a member function of the Harl class that takes
@@ -39,5 +51,5 @@ void	complain(std::string level){
 		return ;
 		}
 	}
-	std::cout << "[UNKNOW] Harl doesn't know this type." << std::endl;
+	std::cout << "[UNKNOW] Harl doesn't know this type. UNKNOW, UNKNOW, UNKNOW" << std::endl;
 }

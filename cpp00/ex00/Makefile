@@ -1,4 +1,4 @@
-NAME := megaphone.exe
+NAME := megaphone
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 RM := rm -f
