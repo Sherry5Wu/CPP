@@ -8,7 +8,7 @@
 #define	GREEN	"\033[1;92m"
 #define	RED		"\033[1;91m"
 #define	RESET	"\033[0;0m"
-#define	MAX_CONTACT	2
+#define	MAX_CONTACT	8
 
 std::string	get_index(const std::string title);
 
