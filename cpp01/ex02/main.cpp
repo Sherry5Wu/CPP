@@ -46,7 +46,7 @@ int	main(void){
 	std::string	&stringREF = string;
 
 	// print the the memory address
-	std::cout << "Bellow are addresses:" << std::endl;
+	std::cout << "Below are addresses:" << std::endl;
 	std::cout << "  * string:   " << &string << std::endl;
 	std::cout << "  * stringPTR:" << stringPTR << std::endl;
 	std::cout << "  * stringREF:" << &stringREF << std::endl;

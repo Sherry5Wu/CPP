@@ -20,16 +20,41 @@
 class Fixed{
 	private:
 		int					value_;
-		static const int	fractional_bits_ = 8; // it means how many bits to
-		// represent the fractional part. Here it means in the value_ , the
-		// lower 8 bits represent fractional part.
+		static const int	fractional_bits_ = 8;
 	public:
 		Fixed();
 		Fixed(const int number);
 		Fixed(const float number);
 		Fixed(const Fixed& other);
-		Fixed&	operator=(const Fixed& other);
 		~Fixed();
+
+		Fixed&	operator=(const Fixed& other);
+		//6 comparison operators
+		bool	operator>(const Fixed& other) const;
+		bool	operator<(const Fixed& other) const;
+		bool	operator>=(const Fixed& other) const;
+		bool	operator>=(const Fixed& other) const;
+		bool	operator==(const Fixed& other) const;
+		bool	operator!=(const Fixed& other) const;
+
+		// 4 arithmetic operators
+		Fixed&	operator+(const Fixed& other) const;
+		Fixed&	operator-(const Fixed& other) const;
+		Fixed&	operator*(const Fixed& other) const;
+		Fixed&	operator/(const Fixed& other) const;
+
+		// pre-increment and pre-decrement
+		Fixed&	operator++();
+		Fixed&	operator--();
+
+		// post-increment and post-decrement
+		Fixed	operator++(int);
+		Fixed	operator--(int);
+
+		static Fixed&	min(Fixed& x, Fixed& y);
+		static Fixed&	min(const Fixed& x, const Fixed& y);
+		static Fixed&	max(Fixed& x, Fixed& y);
+		static Fixed&	max(const Fixed& x, const Fixed& y);
 
 		int		getRawBits() const;
 		void	setRawBits(int const raw);
