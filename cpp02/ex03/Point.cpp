@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:16:52 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/14 14:56:26 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/02/14 14:59:46 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,12 @@ Point::~Point(){}
 Point&	Point::operator=(const Point& other){
 	(void)other;
 	return *this;
+}
+
+Fixed	Point::getX() const{
+	return (this->x_);
+}
+
+Fixed	Point::getY() const{
+	return (this->y_);
 }

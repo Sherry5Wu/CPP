@@ -34,6 +34,11 @@ void	PhoneBook::add(){
 
 	for (i = 0; i < 5; i++){
 		new_contact.print_prompt(i);
+		
+		// handle ctrl + d case
+		if (std::cin.eof() == true){
+			return ;
+		}
 		std::getline(std::cin, input);
 		if (input == ""){
 			std::cout << RED << "The field can't be empty. Please enter again.\n"
@@ -65,6 +70,11 @@ void	PhoneBook::search(){
 	}
 	std::cout << GREEN << "Please enter the index (1~" << _count << ") to see the full information: "
 		<< RESET;
+
+	// handle ctrl + d case
+	if (std::cin.eof() == true){
+			return ;
+	}
 	std::getline(std::cin, index);
 	if (index.length() != 1 || index.at(0) < '1' || index.at(0) > '8'
 		|| index.at(0) - '1' >= _count){

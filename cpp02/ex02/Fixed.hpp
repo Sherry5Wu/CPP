@@ -50,6 +50,9 @@ class Fixed{
 		Fixed&	operator--();
 
 		// post-increment and post-decrement
+		// "int" here is a dummy parameter which doesn't affect the function's
+		// logic or behavior but is included in the function signature to
+		// distinguish it from another function.
 		Fixed	operator++(int);
 		Fixed	operator--(int);
 

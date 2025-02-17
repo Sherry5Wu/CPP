@@ -1,8 +1,8 @@
-NAME := triangle
+NAME := fixed
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp Fixed.cpp bsp.cpp Point.cpp
+SRCS := main.cpp ClapTrap.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)

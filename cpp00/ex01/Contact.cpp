@@ -68,7 +68,6 @@ std::string	truncated_str(std::string str){
 }
 
 void	Contact::print_short(){
-	// std::cout << std::setw(10) << _index << "|";
 	std::cout << std::setw(10) << truncated_str(_first_name) << "|";
 	std::cout << std::setw(10) << truncated_str(_last_name) << "|";
 	std::cout << std::setw(10) << truncated_str(_nickname) << std::endl;

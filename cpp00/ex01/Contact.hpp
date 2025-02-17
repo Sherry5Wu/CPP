@@ -24,7 +24,6 @@ class Contact{
 		std::string	_nickname;
 		std::string	_phone_number;
 		std::string	_darkest_secret;
-		// int			_index;
 		enum field{
 			FIRSTNAME,
 			LASTNAME,
