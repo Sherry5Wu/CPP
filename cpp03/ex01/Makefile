@@ -2,7 +2,7 @@ NAME := clapTrap
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp ClapTrap.cpp
+SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)

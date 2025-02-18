@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:36:14 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/17 13:54:24 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:45:04 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ ClapTrap::ClapTrap(const std::string name) : name_(name), hitPoints_(10), energy
 	attackDamage_(0){
 	std::cout << "Assignment constructor called\n";
 }
+
+ClapTrap::ClapTrap(const std::string name, unsigned int hP, unsigned int eP, unsigned int aD) :
+ name_(name), hitPoints_(hP), energyPoints_(eP), attackDamage_(aD){
+	std::cout << "Parametried construstor called\n";
+ }
 
 ClapTrap::ClapTrap(const ClapTrap& other): name_(other.name_), hitPoints_(other.hitPoints_),
 	energyPoints_(other.energyPoints_), attackDamage_(other.attackDamage_){
