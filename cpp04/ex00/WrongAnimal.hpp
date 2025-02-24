@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 14:03:04 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/24 14:03:04 by jingwu           ###   ########.fr       */
+/*   Created: 2025/02/24 14:03:31 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/24 14:03:31 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#pragma once
 
-#include "Animal.hpp"
 #include <iostream>
 #include <string>
-#define BLUE "\033[0;34m"
+#define ORANGE "\033[38;5;208m"
 
-class Cat : public Animal{
+#ifndef RESET
+# define RESET "\033[0m"
+#endif // RESET
+
+class WrongAnimal{
+	protected:
+		std::string	type_;
+
 	public:
-		Cat();
-		Cat(const std::string type);
-		Cat(const Cat& other);
-		~Cat();
+		WrongAnimal();
+		WrongAnimal(const WrongAnimal& other);
+		virtual ~WrongAnimal();
 
-		Cat&	operator=(const Cat& other);
+		WrongAnimal&	operator=(const WrongAnimal& other);
 
-		void	makeSound() const override;
+		std::string		getType() const;
+		void			makeSound() const;
 };
-
-#endif //CAT_HPP

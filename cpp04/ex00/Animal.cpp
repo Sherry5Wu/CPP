@@ -1,32 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/24 14:02:53 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/24 14:02:53 by jingwu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Animal.hpp"
 
-Animal::Animal() : type_(""){
-	std::cout << "Father class Animal-- DEFAULT constructor called\n";
+Animal::Animal() : type_("default"){
+	std::cout << PURPLE << "Father class Animal-- DEFAULT constructor called\n"
+	<< RESET;
 }
 
 Animal::Animal(const std::string type) : type_(type){
-	std::cout << "Father class Animal-- PARAMETRIED constructor called\n";
+	std::cout << PURPLE << "Father class Animal-- PARAMETERIED constructor called\n"
+	<< RESET;
 }
 
-
 Animal::Animal(const Animal& other) : type_(other.type_){
-	std::cout << "Father class Animal-- COPY constructor called\n";
+	std::cout << PURPLE << "Father class Animal-- COPY constructor called\n"
+	<< RESET;
 }
 
 Animal::~Animal(){
-	std::cout << "Father class Animal-- DECONSTRUCTOR called\n";
+	std::cout << PURPLE << "Father class Animal-- DECONSTRUCTOR called\n"
+	<< RESET;
 }
 
 Animal&	Animal::operator=(const Animal& other){
-	std::cout << "Father class Animal-- ASSIGNMENT operator called\n";
+	std::cout << PURPLE << "Father class Animal-- ASSIGNMENT operator called\n"
+	<< RESET;
 	if (this != &other){
 		this->type_ = other.type_;
 	}
 	return *this;
 }
 
-void	Animal::makeSound(){
-
+void	Animal::makeSound() const{
+	std::cout << "Animal calls like ~~~~~~~~******\n";
 }
-		const std::string	getType();
-		void				setType(const std::string newType);
+
+std::string	Animal::getType() const{
+	return this->type_;
+}
+void	Animal::setType(const std::string newType){
+	this->type_ = newType;
+}

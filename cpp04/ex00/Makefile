@@ -1,8 +1,8 @@
-NAME := fixed
+NAME := animal
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp Animal.cpp
+SRCS := main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)
@@ -27,4 +27,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY all clean fclean re
+.PHONY: all clean fclean re

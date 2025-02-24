@@ -1,8 +1,8 @@
-NAME := scavTrap
+NAME := diamondTrap
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)

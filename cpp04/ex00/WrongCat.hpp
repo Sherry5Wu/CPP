@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 14:03:04 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/24 14:03:04 by jingwu           ###   ########.fr       */
+/*   Created: 2025/02/24 14:03:40 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/24 14:03:40 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 #include <iostream>
 #include <string>
-#define BLUE "\033[0;34m"
+#define CYAN   "\033[0;36m"
 
-class Cat : public Animal{
+
+class WrongCat : public WrongAnimal{
 	public:
-		Cat();
-		Cat(const std::string type);
-		Cat(const Cat& other);
-		~Cat();
+		WrongCat();
+		WrongCat(const WrongCat& other);
+		~WrongCat();
 
-		Cat&	operator=(const Cat& other);
+		WrongCat&	operator=(const WrongCat& other);
 
-		void	makeSound() const override;
+		void	makeSound() const;
 };
 
-#endif //CAT_HPP
+#endif //WRONGCAT_HPP

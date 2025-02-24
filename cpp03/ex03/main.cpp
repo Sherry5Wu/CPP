@@ -13,6 +13,9 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
+#define	GREEN	"\033[1;92m"
 
 void    testEnergyPoints(ClapTrap& name){
     std::cout << BLUE << "Test for energy points consumption\n" << RESET;
@@ -27,6 +30,7 @@ void    testEnergyPoints(ClapTrap& name){
 }
 
 void    testCasesForClapTrap(){
+    std::cout << "Test for ClapTrap:\n";
     ClapTrap    robot;
     robot.printValue();
     std::cout << std::endl;
@@ -45,15 +49,12 @@ void    testCasesForClapTrap(){
 }
 
 void    testCasesForScavTrap(){
-    std::cout << "Testing default constructor:\n";
+    std::cout << GREEN << "\nTest for ScavTrap:\n" << RESET;
     ScavTrap    bee;
     bee.printValue();
-
-    std::cout << "\nTesting parameteried constructor:\n";
+    std::cout << std::endl;
     ScavTrap    beeA("Bumble-Bee");
     beeA.printValue();
-
-    std::cout << "\nTesting attack and repair function\n";
     beeA.attack("bee");
     beeA.printValue();
     beeA.takeDamage(5);
@@ -61,22 +62,70 @@ void    testCasesForScavTrap(){
     beeA.beRepaired(3);
     beeA.printValue();
     beeA.guardGate();
+}
 
-    std::cout << "\nTesting copy constructor:\n";
-    ScavTrap    copyBeeA(beeA);
-    copyBeeA.printValue();
+void    testCasesForFragTrap(){
+    std::cout << GREEN << "\nTest for FragTrap:\n" << RESET;
+    FragTrap    f;
+    f.printValue();
+    std::cout << std::endl;
+    FragTrap    frag("Frag");
+    frag.printValue();
+    frag.attack("little-frag");
+    frag.printValue();
+    frag.takeDamage(5);
+    frag.printValue();
+    frag.beRepaired(3);
+    frag.printValue();
+    frag.highFivesGuys();
 
-    std::cout << "\nTesting assignment operator\n";
-    bee = beeA;
-    bee.printValue();
+    std::cout << GREEN << "\nAssignment operator test:\n" << RESET;
+    FragTrap    littleGuy;
+    FragTrap    nameGuy("name");
+    littleGuy.printValue();
+    littleGuy = nameGuy;
+    littleGuy.printValue();
+}
+
+
+void    testCasedForDiamond(){
+    std::cout << "DiamonTrap's default values are:\n * hitPoints:100\n"
+    << " * energyPoints:50\n * attackDamage:30\n\n";
+
+    // std::cout <<"1. Testing default construtor\n\n";
+    // DiamondTrap def;
+    // def.whoAmI();
+    // def.printMyValue();
+
+    std::cout <<"\n2. Testing parameteried construtor\n\n";
+    DiamondTrap sapphire("sapphire");
+    sapphire.whoAmI();
+    sapphire.printMyValue();
+
+    // std::cout << "\n3. Testing copy constructor\n\n";
+    // DiamondTrap fakeSapphire(sapphire);
+    // fakeSapphire.whoAmI();
+    // fakeSapphire.printMyValue();
+
+    // std::cout << "\n4. Testing assignment operator\n\n";
+    // DiamondTrap dShadow;
+    // dShadow = def;
+    // dShadow.whoAmI();
+    // dShadow.printMyValue();
+
+    std::cout << "\n5. Testing attack and repair functions\n\n";
+    sapphire.attack("fakeSapphire");
+    sapphire.printMyValue();
+    sapphire.beRepaired(20);
+    sapphire.printMyValue();
 }
 
 int main(){
-    // std::cout << "Test for ClapTrap:\n\n";
     // testCasesForClapTrap();
-
-    std::cout << "\nTest for ScavTrap:\n\n";
-    testCasesForScavTrap();
+    // testCasesForScavTrap();
+    // testCasesForFragTrap();
+    std::cout << "Test Cases for DiamondTrap\n\n";
+    testCasedForDiamond();
     return 0;
 }
 

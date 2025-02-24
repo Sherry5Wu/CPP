@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 13:40:01 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/18 09:40:22 by jingwu           ###   ########.fr       */
+/*   Created: 2025/02/18 10:47:49 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/18 13:05:45 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
 #include "ClapTrap.hpp"
-#include <string>
 #include <iostream>
 
-class ScavTrap : public ClapTrap{
+class FragTrap : public ClapTrap{
 	public:
-		ScavTrap();
-		ScavTrap(const std::string& name);
-		ScavTrap(const ScavTrap& other);
-		~ScavTrap();
+		FragTrap();
+		FragTrap(const std::string name);
+		FragTrap(const FragTrap& other);
+		~FragTrap();
 
-		ScavTrap&	operator=(const ScavTrap& other);
+		FragTrap&	operator=(const FragTrap& other);
 
 		void	attack(const std::string& target) override;
-		void	guardGate();
+		void	highFivesGuys();
+
 };
 
-#endif // SCAVTRAP_HPP
+#endif // FRAGTRAP_HPP

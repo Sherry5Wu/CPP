@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:40:14 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/24 13:16:24 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/02/24 09:09:37 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name){
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other){
-	std::cout << ORANGE << "ScavTrap -- Copy constrtuctor called\n"<< RESET;
+	std::cout << ORANGE << "ScavTrap -- Copy constrtuctor called\n "<< RESET;
 }
-
 ScavTrap::~ScavTrap(){
 	std::cout << ORANGE << "ScavTrap -- Deconstructor called\n"<< RESET;
 }
@@ -52,7 +51,7 @@ void	ScavTrap::attack(const std::string& target){
 	}else{
 		this->energyPoints_--;
 		std::cout << ORANGE << "ScavTrap " << this->name_ << " attacks "
-		<< target << "\n" << RESET;
+		<< target << RESET;
 	}
 }
 

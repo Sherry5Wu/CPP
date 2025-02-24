@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:36:03 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/18 10:34:05 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/02/24 08:32:13 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,15 @@
 #include <iostream>
 
 // define color
-#define	GREEN	"\033[1;92m"
-// #define	RED		"\033[1;91m"
-#define PURPLE   "\033[1;35m"  // Bold purple
-// #define PINK     "\033[1;38;5;213m"
-#define ORANGE   "\033[1;38;5;214m"
-#define BLUE   "\033[1;34m"
+#define PURPLE   "\033[1;35m"
 #define	RESET	"\033[0;0m"
 
 class ClapTrap{
 	public:
 		ClapTrap();
 		ClapTrap(const std::string name);
-		ClapTrap(const std::string name, unsigned int hP, unsigned int eP, unsigned int aD);
 		ClapTrap(const ClapTrap& other);
-		~ClapTrap();
+		virtual ~ClapTrap();
 
 		ClapTrap&	operator=(const ClapTrap& other);
 

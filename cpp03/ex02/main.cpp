@@ -12,9 +12,11 @@
 
 #include <iostream>
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 void    testEnergyPoints(ClapTrap& name){
-    std::cout << BLUE << "\nTest for energy points consumption\n" << RESET;
+    std::cout << BLUE << "Test for energy points consumption\n" << RESET;
 
     for (int i = 0; i < 10 ; i++){
         name.attack("nobody");
@@ -26,7 +28,7 @@ void    testEnergyPoints(ClapTrap& name){
 }
 
 void    testCasesForClapTrap(){
-
+    std::cout << "Test for ClapTrap:\n";
     ClapTrap    robot;
     robot.printValue();
     std::cout << std::endl;
@@ -44,9 +46,49 @@ void    testCasesForClapTrap(){
 
 }
 
+void    testCasesForScavTrap(){
+    std::cout << GREEN << "\nTest for ScavTrap:\n" << RESET;
+    ScavTrap    bee;
+    bee.printValue();
+    std::cout << std::endl;
+    ScavTrap    beeA("Bumble-Bee");
+    beeA.printValue();
+    beeA.attack("bee");
+    beeA.printValue();
+    beeA.takeDamage(5);
+    beeA.printValue();
+    beeA.beRepaired(3);
+    beeA.printValue();
+    beeA.guardGate();
+}
+
+void    testCasesForFragTrap(){
+    std::cout << GREEN << "\nTest for FragTrap:\n" << RESET;
+    FragTrap    f;
+    f.printValue();
+    std::cout << std::endl;
+    FragTrap    frag("Frag");
+    frag.printValue();
+    frag.attack("little-frag");
+    frag.printValue();
+    frag.takeDamage(5);
+    frag.printValue();
+    frag.beRepaired(3);
+    frag.printValue();
+    frag.highFivesGuys();
+
+    std::cout << GREEN << "\nAssignment operator test:\n" << RESET;
+    FragTrap    littleGuy;
+    FragTrap    nameGuy("name");
+    littleGuy.printValue();
+    littleGuy = nameGuy;
+    littleGuy.printValue();
+}
+
 int main(){
-    std::cout << "Test for ClapTrap:\n\n";
-    testCasesForClapTrap();
+    // testCasesForClapTrap();
+    // testCasesForScavTrap();
+    testCasesForFragTrap();
     return 0;
 }
 

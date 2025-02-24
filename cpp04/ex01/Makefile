@@ -1,8 +1,8 @@
-NAME := scavTrap
+NAME := animal
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS := main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)

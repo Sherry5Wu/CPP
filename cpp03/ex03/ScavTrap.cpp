@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:40:14 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/24 13:16:24 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:59:38 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name){
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other){
-	std::cout << ORANGE << "ScavTrap -- Copy constrtuctor called\n"<< RESET;
+	std::cout << ORANGE << "ScavTrap -- Copy constrtuctor called\n "<< RESET;
 }
-
 ScavTrap::~ScavTrap(){
-	std::cout << ORANGE << "ScavTrap -- Deconstructor called\n"<< RESET;
+	std::cout << ORANGE << "ScavTrap -- Deconstructor called. " << this->name_ 
+	<< " has been destoryed!\n"<< RESET;
 }
 
 ScavTrap&	ScavTrap::operator=(const ScavTrap& other){
