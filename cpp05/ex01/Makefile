@@ -1,8 +1,8 @@
-NAME := animal
+NAME := ex01
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp Bureaucrat.cpp
+SRCS := main.cpp Bureaucrat.cpp Form.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)
