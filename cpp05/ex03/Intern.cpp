@@ -13,8 +13,31 @@ Intern&	Intern::operator=(const Intern& other){
 	return *this;
 }
 
-AForm*	Intern::makeForm(const std::string& name, const std::string& target){
-	std::string formType[] = {"shrubbery", "robotomy", "predidential"};
+AForm* Intern::makeShrub(const std::string& target){
+	return new ShrubberyCreationForm(target);
+}
 
-	AForm* (*from)
+AForm* makeRobot(const std::string& target){
+	return new RobotomyRequestForm(target);
+}
+
+AForm* makePresi(const std::string& target){
+	return new PresidentialPardonForm(target);
+}
+
+AForm*	Intern::makeForm(const std::string& name, const std::string& target){
+	std::string formType[3] = {"shrubbery", "robotomy", "predidential"};
+
+	// the function array point to form making functions
+	AForm* (*formFunction[3])(const std::string& target) = {&Intern::makeShrub,
+	&Intern::makeRobot, &Intern::makePresi};
+
+	for (int i = 0; i < 3 ;i++){
+		if (name == formType[i]){
+			std::cout << "Intern creates " << formType[i] << std::endl;
+			return formFunction[i](target);
+		}
+	}
+	std::cout << "Invalid form type, can't create that form\n";
+	return 0;
 }

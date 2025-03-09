@@ -3,7 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 class Intern{
 	public:
@@ -13,6 +15,9 @@ class Intern{
 
 		Intern&	operator=(const Intern& other);
 		AForm*	makeForm(const std::string& name, const std::string& target);
+		static AForm* makeShrub(const std::string& target);
+		static AForm* makeRobot(const std::string& target);
+		static AForm* makePresi(const std::string& target);
 };
 
 #endif // INTERNHPP
