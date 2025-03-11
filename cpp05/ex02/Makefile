@@ -1,8 +1,9 @@
-NAME := interface
+NAME := ex02
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
+SRCS := main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+        RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)

@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 09:34:39 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/25 14:37:09 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/03/11 08:23:45 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	Character::equip(AMateria* m){
 			return;
 		}
 	}
+	std::cout << "full\n";  // for testing!!!!!
 }
 
 void	Character::unequip(int idx){
@@ -88,12 +89,11 @@ void	Character::use(int idx, ICharacter& target){
 }
 
 /***************************For testing*****************************/
-#define DARK_YELLOW "\033[1;33m"
+#define DARK_YELLOW "\033[0;33m"
 #define RESET "\033[0;0m"
 
 void	Character::printInfo(){
-	std::cout << "\nname is " << DARK_YELLOW << name_ << RESET <<"\n";
-	std::cout << "Inventory are:\n";
+	std::cout << DARK_YELLOW << name_<< "'s inventory are "  << RESET <<"\n";
 	for (int i = 0; i < AMONUT; i++){
 		if (inventory_[i] == nullptr){
 			std::cout << " * Inventory " << i << " is empty\n";
@@ -102,4 +102,10 @@ void	Character::printInfo(){
 			<< "\n";
 		}
 	}
+}
+
+AMateria*	Character::getInventory(int idx){
+	if (idx < 0 || idx > 3)
+		return nullptr;
+	return (inventory_[idx]);
 }

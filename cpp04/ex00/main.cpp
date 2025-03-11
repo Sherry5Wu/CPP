@@ -86,6 +86,7 @@ static void	negativestCase(){
 	<< "'makeSound' function wrongly.\nSo we will hear the sound like this:\n";
 	catA->makeSound();
 
+	delete catA;
 }
 
 // Animal is Purple color, Dog is dark-yellow, cat is blue color

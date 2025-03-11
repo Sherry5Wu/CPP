@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 09:34:35 by jingwu            #+#    #+#             */
-/*   Updated: 2025/02/25 14:31:37 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/03/11 08:21:33 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ class Character : public ICharacter{
 		void 				use(int idx, ICharacter& target) override;
 
 		// for testing
-		void	printInfo() override;
+		void		printInfo() override;
+		AMateria*	getInventory(int idx);
 };

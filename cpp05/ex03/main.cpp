@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:44:45 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:44:45 by jingwu           ###   ########.fr       */
+/*   Created: 2025/02/24 14:03:18 by jingwu            #+#    #+#             */
+/*   Updated: 2025/02/24 14:03:18 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
-
 #include <iostream>
-#include <string>
-#define RESET "\033[0m"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+
+#define RED "\033[0;31m"
+#define GREEN "\033[0;32m"
 #define PURPLE "\033[0;35m"
+#define RESET "\033[0;0m"
 
-class Animal{
-	protected:
-		std::string	type_;
+int main(){
+	std::cout << GREEN << "------------Testing consructors and assignment operator";
+ need test casese;
 
-	public:
-		Animal();
-		Animal(const std::string type);
-		Animal(const Animal& other);
-		virtual	~Animal();
+	return 0;
+}
 
-		Animal&	operator=(const Animal& other);
-
-		virtual void	makeSound() const;
-		std::string		getType() const;
-		void			setType(const std::string newType);
-};
-
-#endif
