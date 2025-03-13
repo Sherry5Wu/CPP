@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter1.cpp                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/13 14:43:51 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/13 14:43:51 by jingwu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter(){}
@@ -11,101 +23,6 @@ ScalarConverter::~ScalarConverter(){}
 ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& other){
 	(void)other;
 	return *this;
-}
-
-/*--------------------------Type checking functions-------------------------*/
-/**
- * @brief how to check if the passed str is a char?
- *  1. the lenght of the str is 1;
- *  2. the character is not a digit;
- *  3. the character is printable.
- *
- * Why convert str to unsigned char type?
- *  isdigit is expecting a unsigned char type value. If we don't convert it,
- *  it might cause some undefined error.
- */
-bool	ScalarConverter::isChar(const std::string& str){
-	return (str.length() == 1 && !std::isdigit(static_cast<unsigned char>(str[0]))
-			&& std::isprint(str[0]));
-}
-
-bool	isInt(const std::string& str){
-	size_t	i = 0;
-	size_t	length = str.length();
-
-	// here checking length is very important
-	if ((str[i] == '-' || str[i] == '+') && length > 1)
-		i++;
-	for (; i < length; i++){
-		if (!std::isdigit(static_cast<unsigned char>(str[i])))
-			return false;
-	}
-	return true;
-}
-
-bool	ScalarConverter::isInt(const std::string& str){
-	size_t	i = 0;
-	size_t	length = str.length();
-
-	// here checking length is very important
-	if ((str[i] == '-' || str[i] == '+') && length > 1)
-		i++;
-	for (; i < length; i++){
-		if (!std::isdigit(static_cast<unsigned char>(str[i])))
-			return false;
-	}
-	return true;
-}
-
-bool	ScalarConverter::isDouble(const std::string& str){
-	size_t	length = str.length();
-
-	// if the length of the str less than 3, it must be invalid.
-	if (length < 3){
-		return false;
-	}
-
-	size_t	i = 0;
-	size_t	dot = str.find('.'); // the index of the first dot
-
-	// Here to make sure it only contains one dot and the dot isn't at the end
-	if (dot == std::string::npos || str.find('.', (dot + 1)) != std::string::npos){
-		return false;
-	}
-
-	if ((str[i] == '-' || str[i] == '+') && str.length() > 2)
-		i++;
-	for (; i < str.length(); i++){
-		if (!(std::isdigit(static_cast<unsigned char>(str[i])) || str[i] == '.')){
-			return false;
-		}
-	}
-	return true;
-}
-
-bool	ScalarConverter::isFloat(const std::string& str){
-	size_t	length = str.length();
-
-	// if the length of the str less than 4, it must be invalid.
-	if (length < 4){
-		return false;
-	}
-	if (isDouble(str.substr(0, length - 1)) && str[length - 1] == 'f'){
-		return true;
-	}
-	return false;
-}
-
-bool	ScalarConverter::isPseudoFloat(const std::string& str){
-	if (str == "-inff" || str == "+inff" || str == "nanf")
-		return true;
-	return false;
-}
-
-bool	ScalarConverter::isPseudoDouble(const std::string& str){
-	if (str == "-inf" || str == "+inf" || str == "nan")
-		return true;
-	return false;
 }
 
 /*-----------------------------checking overflow----------------------------*/
@@ -134,6 +51,130 @@ int	ScalarConverter::isOverflow(const double& num){
 		return 1; // char overflow
 	}
 	return 0; // it isn't overflow
+}
+
+/*--------------------------Type checking functions-------------------------*/
+/**
+ * @brief how to check if the passed str is a char?
+ *  1. the lenght of the str is 1;
+ *  2. the character is not a digit;
+ *  3. the character is printable.
+ *
+ * Why convert str to unsigned char type?
+ *  isdigit is expecting a unsigned char type value. If we don't convert it,
+ *  it might cause some undefined error.
+ *
+ * @return true: the input is a char type (but not sure if it is printable)
+ * false: the input it is not a char type;
+ */
+bool	ScalarConverter::isChar(const std::string& str){
+	return (str.length() == 1 && !std::isdigit(static_cast<unsigned char>(str[0]))
+			&& std::isprint(str[0]));
+}
+
+bool	isInt(const std::string& str){
+	size_t	i = 0;
+	size_t	length = str.length();
+
+	// here checking length is very important
+	if ((str[i] == '-' || str[i] == '+') && length > 1)
+		i++;
+	for (; i < length; i++){
+		if (!std::isdigit(static_cast<unsigned char>(str[i])))
+			return false;
+	}
+	return true;
+}
+
+/**
+ * @brief function stoi() will try to convert the string into a int num,
+ * if the convert successfully, then there is no exception. But if there is
+ * invalid charactors, it will throw "invald_agrument" exception; if the
+ * value is out of int range, it will throw "out_of_range" exception.
+ *
+ * @return true: the input is a int type and won't overflow;
+ *  false: the input is not a int type or it overflow.
+ */
+bool	ScalarConverter::isInt(const std::string& str){
+		// size_t	i = 0;
+	// size_t	length = str.length();
+
+	// // 1. checking if just contains digits
+	// // here checking length is very important
+	// if ((str[i] == '-' || str[i] == '+') && length > 1)
+	// 	i++;
+	// for (; i < length; i++){
+	// 	if (!std::isdigit(static_cast<unsigned char>(str[i])))
+	// 		return false;
+	// }
+
+	// // 2. checking if overflow int type, if it is overflow, than the
+	// // program will catch out_of_range exception
+	// try{
+	// 	size_t	pos;
+	// 	std::stoi(str, &pos);
+	// 	bool isInt = (pos == str.length()); // checking if convert until the end
+		// if (isInt == true){
+		// 	return true;
+		// }
+		// return false;
+	// } catch (const std::out_of_range& e){
+	// 	return false;
+	// }
+
+	try{
+		size_t	pos;
+		std::stoi(str, &pos);
+		bool isInt = (pos == str.length()); // checking if convert until the end
+		if (isInt == true){
+			return true;
+		}
+		return false;
+	} catch (const std::out_of_range& e){
+		return false;
+	} catch (const std::invalid_argument& e){
+		return false;
+	} catch (const std::exception& e){
+		std::cerr << "ScalarConverter::isInt error: " << e.what() << std::endl;
+		return false;
+	}
+}
+
+bool	ScalarConverter::isFloat(const std::string& str){
+	try{
+		size_t	pos;
+		std::stof(str, &pos);
+		return pos + 1 == str.length() && str.back() == 'f';
+	} catch (const std::out_of_range& e){
+		return false;
+	} catch (const std::invalid_argument& e){
+		return false;
+	}
+}
+
+bool	ScalarConverter::isDouble(const std::string& str){
+	try{
+		size_t	pos;
+		double	num = std::stod(str, &pos);
+		(void)num;
+	} catch (const std::out_of_range& e){
+		return false;
+	} catch (const std::invalid_argument& e){
+		return false;
+	}
+	return true;
+}
+
+bool	ScalarConverter::isPseudoFloat(const std::string& str){
+	if (str == "-inff" || str == "+inff" || str == "nanf")
+		return true;
+	return false;
+}
+
+bool	ScalarConverter::isPseudoDouble(const std::string& str){
+	if (str == "-inf" || str == "+inf" || str == "nan")
+		return true;
+	return false;
 }
 
 /*--------------------------------print char-------------------------------*/

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:56:19 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:56:19 by jingwu           ###   ########.fr       */
+/*   Created: 2025/03/11 08:55:26 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/11 08:55:26 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class AForm{
 		const std::string&	getTarget() const;
 		void				beSigned(const Bureaucrat& bureau);
 		void				execute(const Bureaucrat& executor) const;
-		virtual void		executeForm(const Bureaucrat& executor) const = 0;
+		virtual void		executeForm() const = 0;
 
 		class GradeTooHighException : public std::exception{
 			public:

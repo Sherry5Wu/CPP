@@ -12,8 +12,6 @@
 
 #include "ScalarConverter.hpp"
 
-/*--------------------------class basic functions-------------------------*/
-
 ScalarConverter::ScalarConverter(){}
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other){
@@ -26,6 +24,34 @@ ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& other){
 	(void)other;
 	return *this;
 }
+
+/*-----------------------------checking overflow----------------------------*/
+
+/**
+ * Keypoints to understand:
+ *  --FLT_MIN is the smallest positive non-zero value that can be represented by a
+ * 		      float, not the smallest (most negative) value.
+ *
+ *  --(-FLT_MAX) is the largest negative finite value, i.e., the most negative number
+ *            that can be represented by a float
+ *  --FLT_MAX is the largest positive finite value that a float can hold.
+ */
+// int	ScalarConverter::isOverflow(const double& num){
+// 	if (num < nextafter(nextafter(-FLT_MAX, 0), -FLT_MAX)
+// 		|| num > nextafter((FLT_MAX, 0), FLT_MAX)){
+// 		return 3; // float overflow
+// 	}
+// 	if (num < nextafter(nextafter(INT_MIN,0), INT_MIN)
+// 		|| num > nextafter(nextafter(INT_MAX,0), INT_MAX)){
+// 		return 2; // int overflow
+// 	}
+// 	// when do we need this????
+// 	if (num < nextafter(nextafter(CHAR_MIN, 0), CHAR_MIN)
+// 		|| num > nextafter(nextafter(CHAR_MAX, 0), CHAR_MAX)){
+// 		return 1; // char overflow
+// 	}
+// 	return 0; // it isn't overflow
+// }
 
 /*--------------------------Type checking functions-------------------------*/
 /**
@@ -174,6 +200,11 @@ bool	ScalarConverter::isDouble(const std::string& str, int& overflowFlag){
 	try{
 		size_t	pos;
 		std::stod(str, &pos);
+		// bool isFullConvertion = (pos == str.length()); // checking if convert until the end
+		// if (isFullConvertion == true){
+		// 	return true;
+		// }
+		// return false;
 		return true;
 	} catch (const std::out_of_range& e){
 		overflowFlag |= DoubleOverflow;
@@ -218,7 +249,74 @@ Type	ScalarConverter::checkType(const std::string& str, int& overflowFlag){
 	}
 }
 
+/*--------------------------------print char-------------------------------*/
+
+/**
+ * @breif The rule to print:
+ * 	-- If the char does overflow, than print "impossible";
+ *  -- If the char is Not printable, then printf "Non displayble";
+ *  -- else, print the char directly.
+ */
+// void	ScalarConverter::printChar(const char& c, bool overflow){
+// 	std::cout << "char: ";
+// 	if (!overflow){
+// 		if (std::isprint(static_cast<unsigned int>(c))){
+// 			std::cout << "'" << c << "'\n";
+// 		}else{
+// 			std::cout << "Non displayable\n";
+// 		}
+// 	}else{
+// 		std::cout << "impossible\n";
+// 	}
+// }
+
 /*--------------------------convertion functions-------------------------*/
+
+// void	ScalarConverter::charConverter(const std::string& str){
+// 	std::cout << "char: " << "'" << str[0] << "'\n";
+// 	std::cout << "int: " << static_cast<int>(str[0]) << "\n";
+// 	std::cout << "float: " << static_cast<float>(str[0]) << ".0f\n";
+// 	std::cout << "double: " << static_cast<double>(str[0]) << ".0\n";
+// }
+
+// void	ScalarConverter::intConverter(const std::string& str){
+// 	size_t	pos;
+// 	double	num = std::stod(str, &pos);
+// 	int		overflow = ScalarConverter::isOverflow(num);
+
+// 	// output char info
+// 	ScalarConverter::printChar(static_cast<char>(num), overflow);
+// 	// output int info
+// 	if (overflow < 2){
+// 		std::cout << "int: " << static_cast<int>(num) <<"\n";
+// 	}else{
+// 		std::cout << "int: impossible\n";
+// 	}
+// 	// output float info
+// 	if (overflow < 2){
+// 		std::cout << "float: " << static_cast<float>(num) <<".0f\n";
+// 	}else{
+// 		std::cout << "float: impossible\n";
+// 	}
+// 	// output dobule info
+// 	std::cout << "double: " << num << std::endl;
+// }
+
+// void	ScalarConverter::floatConverter(const std::string& str){
+
+// }
+
+// void	ScalarConverter::doubleConverter(const std::string& str){
+
+// }
+
+// void	ScalarConverter::pseudoFloatConverter(const std::string& str){
+
+// }
+
+// void	ScalarConverter::pesudoDoubleConverter(const std::string& str){
+
+// }
 
 void	ScalarConverter::convert(Type type, const std::string& str, char& c,
 int& i, float& f, double& d){
@@ -259,6 +357,15 @@ int& i, float& f, double& d){
 			std::cerr << "ScalarConverter::convert() error: unknow type\n";
 	}
 }
+
+// bool ScalarConverter::isTheTypeOverflow(int overflowFlags, int overflowType)
+// {
+// 	// if (overflowFlags & overflowType) is 0,it means no overflow.
+// 	// so when return is:
+// 	//		true: there is overflow;
+// 	//		false: there is Not overflow;
+// 	return (overflowFlags & overflowType) != 0;
+// }
 
 void	ScalarConverter::display(Type type, int overflowFlags, char c, int i,
 float f, double d){

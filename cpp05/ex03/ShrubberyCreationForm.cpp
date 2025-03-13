@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:56:56 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:56:56 by jingwu           ###   ########.fr       */
+/*   Created: 2025/03/11 08:56:03 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/11 08:56:03 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 #define	THE_TREE "\
-		ccee88oo\n\
+        ccee88oo\n\
     C8O8O8Q8PoOb o8oo\n\
  dOB69QO8PdUOpugoO9bD\n\
 CgggbU8OU qOp qOdoUOdcb\n\
@@ -41,15 +41,7 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return *this;
 }
 
-void	ShrubberyCreationForm::executeForm(const Bureaucrat & executor) const{
-	// if (!getIsSigned()){
-	// 	throw FormNotSignedException("From isn't signed yet");
-	// }
-	// if (executor.getGrade() > this->geteGradeToExecute()){
-	// 	throw GradeTooLowException("The executor's grade is too low, can't execute");
-	// }
-
-	// open the file for output
+void	ShrubberyCreationForm::executeForm() const{
 	std::ofstream	outfile((this->getTarget() + "_shrubbery").c_str());
 	if (!outfile){
 		throw std::runtime_error("Error: Couldn't open the file in Shrubbery class");

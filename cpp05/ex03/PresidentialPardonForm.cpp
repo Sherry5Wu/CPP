@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:56:39 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:56:39 by jingwu           ###   ########.fr       */
+/*   Created: 2025/03/11 08:55:39 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/11 08:55:39 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ PresidentialPardonForm&	PresidentialPardonForm::operator=(const PresidentialPard
 	return *this;
 }
 
-void	PresidentialPardonForm::executeForm(const Bureaucrat & executor) const{
-	// if (!getIsSigned()){
-	// 	throw FormNotSignedException("From isn't signed yet");
-	// }
-	// if (executor.getGrade() > this->geteGradeToExecute()){
-	// 	throw GradeTooLowException("The executor's grade is too low, can't execute");
-	// }
+void	PresidentialPardonForm::executeForm() const{
 	std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox.\n";
 }

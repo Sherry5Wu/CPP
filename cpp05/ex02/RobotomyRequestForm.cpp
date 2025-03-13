@@ -53,12 +53,6 @@ RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& o
  * of execution will be different.
  */
 void	RobotomyRequestForm::executeForm() const{
-	// if (!getIsSigned()){
-	// 	throw FormNotSignedException("From isn't signed yet");
-	// }
-	// if (executor.getGrade() > this->geteGradeToExecute()){
-	// 	throw GradeTooLowException("The executor's grade is too low, can't execute");
-	// }
 	std::cout << "Drilling noises is coming: Ziiii Ziiiiii Ziiiiiii\n";
 
 	std::srand(std::time(0)); // set a seed

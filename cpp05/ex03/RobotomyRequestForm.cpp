@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:56:48 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:56:48 by jingwu           ###   ########.fr       */
+/*   Created: 2025/03/11 08:55:49 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/11 08:55:49 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,7 @@ RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& o
  * the random number sequence will be different because the time at the moment
  * of execution will be different.
  */
-void	RobotomyRequestForm::executeForm(const Bureaucrat & executor) const{
-	// if (!getIsSigned()){
-	// 	throw FormNotSignedException("From isn't signed yet");
-	// }
-	// if (executor.getGrade() > this->geteGradeToExecute()){
-	// 	throw GradeTooLowException("The executor's grade is too low, can't execute");
-	// }
+void	RobotomyRequestForm::executeForm() const{
 	std::cout << "Drilling noises is coming: Ziiii Ziiiiii Ziiiiiii\n";
 
 	std::srand(std::time(0)); // set a seed

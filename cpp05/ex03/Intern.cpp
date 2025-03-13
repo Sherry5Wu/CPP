@@ -29,20 +29,21 @@ AForm* Intern::makeShrub(const std::string& target){
 	return new ShrubberyCreationForm(target);
 }
 
-AForm* makeRobot(const std::string& target){
+AForm* Intern::makeRobot(const std::string& target){
 	return new RobotomyRequestForm(target);
 }
 
-AForm* makePresi(const std::string& target){
+AForm* Intern::makePresi(const std::string& target){
 	return new PresidentialPardonForm(target);
 }
 
 AForm*	Intern::makeForm(const std::string& name, const std::string& target){
-	std::string formType[3] = {"shrubbery", "robotomy", "predidential"};
+	std::string formType[3] = {"shrubbery", "robotomy", "presidential"};
 
 	// the function array point to form making functions
 	AForm* (*formFunction[3])(const std::string& target) = {&Intern::makeShrub,
-	&Intern::makeRobot, &Intern::makePresi};
+															&Intern::makeRobot,
+															&Intern::makePresi};
 
 	for (int i = 0; i < 3 ;i++){
 		if (name == formType[i]){

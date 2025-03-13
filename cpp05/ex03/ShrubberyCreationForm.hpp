@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:57:02 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:57:02 by jingwu           ###   ########.fr       */
+/*   Created: 2025/03/11 08:56:07 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/11 08:56:07 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ class ShrubberyCreationForm : public AForm{
 		~ShrubberyCreationForm();
 
 		ShrubberyCreationForm&	operator=(const ShrubberyCreationForm& o);
-		// void	execute(const Bureaucrat & executor) const override;
-		void	executeForm(const Bureaucrat & executor) const override;
+		void	executeForm() const override;
 };
 
 #endif //SHRUBBERYCREATIONFORM

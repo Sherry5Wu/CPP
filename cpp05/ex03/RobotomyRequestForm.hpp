@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:56:52 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:56:52 by jingwu           ###   ########.fr       */
+/*   Created: 2025/03/11 08:55:59 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/11 08:55:59 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ class RobotomyRequestForm : public AForm{
 		~RobotomyRequestForm();
 
 		RobotomyRequestForm&	operator=(const RobotomyRequestForm& o);
-		// void	execute(const Bureaucrat & executor) const override;
-		void	executeForm(const Bureaucrat & executor) const override;
+		void	executeForm() const override;
 };
 
 #endif //ROBOTOMYREQUESTFORM

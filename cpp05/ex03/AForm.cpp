@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:56:15 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/11 08:56:15 by jingwu           ###   ########.fr       */
+/*   Created: 2025/03/11 08:55:22 by jingwu            #+#    #+#             */
+/*   Updated: 2025/03/11 08:55:22 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	AForm::execute(const Bureaucrat& executor) const{
 	if (executor.getGrade() > this->geteGradeToExecute()){
 		throw GradeTooLowException("The executor's grade is too low, can't execute");
 	}
-	this->executeForm(executor);
+	this->executeForm();
 }
 
 /*--------------------------Exception funtions-------------------------------*/
