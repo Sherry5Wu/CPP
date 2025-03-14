@@ -41,65 +41,31 @@ ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& other){
  * @return true: the input is a char type (but not sure if it is printable)
  * false: the input it is not a char type;
  */
-bool	ScalarConverter::isChar(const std::string& str){
+bool	isChar(const std::string& str){
 	return (str.length() == 1 && !std::isdigit(static_cast<unsigned char>(str[0]))
 			&& std::isprint(str[0]));
-}
-
-bool	isInt(const std::string& str){
-	size_t	i = 0;
-	size_t	length = str.length();
-
-	// here checking length is very important
-	if ((str[i] == '-' || str[i] == '+') && length > 1)
-		i++;
-	for (; i < length; i++){
-		if (!std::isdigit(static_cast<unsigned char>(str[i])))
-			return false;
-	}
-	return true;
-}
-
-/**
- * @return true: the num overflow for char type;
- * false: the num doesn't overflow for char type.
- */
-bool	ScalarConverter::isOverflowCharType(int num){
-	if (num < static_cast<int>(std::numeric_limits<char>::min()
-		|| num > static_cast<int>(std::numeric_limits<char>::max()))){
-		return true;
-	}
-	return false;
 }
 
 /**
  * @return true: the input is a int type and won't overflow;
  *  false: the input is not a int type or it overflow.
  */
-bool	ScalarConverter::isInt(const std::string& str, int& overflowFlag){
-	try{
-		size_t	pos;
-		int num = std::stoi(str, &pos);
-		bool isFullConvertion = (pos == str.length()); // checking if convert until the end
-		if (isFullConvertion == true){
-			if (isOverflowCharType(num) == true){
-				overflowFlag |= CharOverflow;
-			}
-			return true;
-		}
-		return false;
-	} catch (const std::out_of_range& e){
-		overflowFlag |= IntOverflow;
-		return false;
-	} catch (const std::invalid_argument& e){
-		return false;
-	} catch (const std::exception& e){
-		std::cerr << "ScalarConverter::isInt error: " << e.what() << std::endl;
-		return false;
+bool	isInt(const std::string& str){
+	size_t	i = 0;
+	size_t	length = str.length();
+
+	if ((str[i] == '-' || str[i] == '+') && length > 1){
+		i++;
 	}
+	for (; i < length ; i++){
+		if (!std::isdigit(static_cast<unsigned char>(str[i]))){
+			return false;
+		}
+	}
+	return true;
 }
 
-bool	ScalarConverter::isFloat(const std::string& str, int& overflowFlag){
+bool	isFloat(const std::string& str){
 	size_t	length = str.length();
 
 	// if the length of the str less than 4, it must be invalid.
@@ -109,7 +75,7 @@ bool	ScalarConverter::isFloat(const std::string& str, int& overflowFlag){
 
 	//  there is no 'f' or 'f' is not at the end of the string, return false
 	size_t	f_pos = str.find('f');
-	if (f_pos == std::string::npos || f_pos != length){
+	if (f_pos == std::string::npos || f_pos != length - 1){
 		return false;
 	}
 	// checking for the '.' postion
@@ -128,31 +94,21 @@ bool	ScalarConverter::isFloat(const std::string& str, int& overflowFlag){
 			return false;
 		}
 	}
-
-	try {
-		size_t	pos;
-		std::stof(str, &pos);
-		// return pos == length - 1;
-		return true;
-	} catch (const std::out_of_range& e){
-		overflowFlag |= FloatOverflow;
-		return false;
-	}
+	return true;
 }
 
-
-bool	ScalarConverter::isDouble(const std::string& str, int& overflowFlag){
-	// 1. checking if the format follows the doublt rules(contain only
-	// digit and '.', and only contain one dot. It is not starting or ending
-	// with the dot)
-
+/**
+ * @brief hecking if the format follows the doublt rules(contain only digit and '.',
+ * and only contain one dot. It is not starting or ending with the dot)
+ */
+bool	isDouble(const std::string& str){
 	size_t	length = str.length();
 	// if the length of the str less than 3, it must be invalid.
 	if (length < 3){
 		return false;
 	}
 	size_t	i = 0;
-	size_t	dot = str.find('.'); // the index of the first dot
+	size_t	dot = str.find('.');
 
 	// Here to make sure it only contains one dot and the dot isn't at the
 	// front or end
@@ -164,31 +120,20 @@ bool	ScalarConverter::isDouble(const std::string& str, int& overflowFlag){
 		i++;
 	}
 	for (; i < str.length(); i++){
-		if (!(std::isdigit(static_cast<unsigned char>(str[i]))
-			|| str[i] == '.')){
+		if (!(std::isdigit(static_cast<unsigned char>(str[i])) || str[i] == '.')){
 			return false;
 		}
 	}
-
-	// 2. checking if it overflow double type
-	try{
-		size_t	pos;
-		std::stod(str, &pos);
-		return true;
-	} catch (const std::out_of_range& e){
-		overflowFlag |= DoubleOverflow;
-		return false;
-	}
+	return true;
 }
 
-
-bool	ScalarConverter::isPseudoFloat(const std::string& str){
+bool	isPseudoFloat(const std::string& str){
 	if (str == "-inff" || str == "+inff" || str == "nanf")
 		return true;
 	return false;
 }
 
-bool	ScalarConverter::isPseudoDouble(const std::string& str){
+bool	isPseudoDouble(const std::string& str){
 	if (str == "-inf" || str == "+inf" || str == "nan")
 		return true;
 	return false;
@@ -200,97 +145,123 @@ bool	ScalarConverter::isPseudoDouble(const std::string& str){
  * @brief the function will check which type the passed string belong to,
  * and get the overflow information.
  */
-Type	ScalarConverter::checkType(const std::string& str, int& overflowFlag){
+Type	checkType(const std::string& str){
 	if (isChar(str)){
 		return Type::Char;
-	}else if(isInt(str, overflowFlag)){
+	}else if(isInt(str)){
 		return Type::Int;
 	}else if(isPseudoFloat(str)){
 		return Type::PseudoFloat;
-	}else if(isFloat(str, overflowFlag)){
+	}else if(isFloat(str)){
 		return Type::Float;
 	}else if (isPseudoDouble(str)){
 		return Type::PseudoDouble;
-	}else if (isDouble(str, overflowFlag)){
+	}else if (isDouble(str)){
 		return Type::Double;
 	}else {
 		return Type::Unknow;
 	}
 }
 
+/**
+ * don't need consider unknow type, it will check beforehand
+ */
+int	getOverflowInfo(const std::string& str, const Type& type){
+	int		overflowFlag = 0;
+	double	num = 0;
+
+	try{
+		size_t	pos;
+		num = std::stod(str, &pos);
+		if (type == Type::Float){
+			if (pos != str.length() - 1){
+				return -1;
+			}
+		} else if (pos != str.length()){
+			return -1;
+		}
+	} catch (const std::out_of_range& e){
+		overflowFlag |= DoubleOverflow;
+		return overflowFlag; //double level overflow
+	} catch (const std::invalid_argument& e){
+		return -1;
+	} catch (const std::exception& e){
+		std::cout << "ScalarConverter::isDouble() error: " << e.what() << std::endl;
+		return -1;
+	}
+	if (num < nextafter(nextafter(-FLT_MAX, 0), -FLT_MAX)
+		|| num > nextafter(nextafter(FLT_MAX, 0), FLT_MAX)){
+		overflowFlag |= FloatOverflow;
+		return overflowFlag; // float level overflow
+	}
+	if (num < nextafter(nextafter(INT_MIN,0), INT_MIN)
+		|| num > nextafter(nextafter(INT_MAX,0), INT_MAX)){
+		overflowFlag |= IntOverflow;
+		return overflowFlag; // int level overflow
+	}
+	if (num < nextafter(nextafter(CHAR_MIN, 0), CHAR_MIN)
+		|| num > nextafter(nextafter(CHAR_MAX, 0), CHAR_MAX)){
+		overflowFlag |= CharOverflow;
+		return overflowFlag; // char level overflow
+	}
+	return overflowFlag; // it isn't overflow at any type
+}
+
 /*--------------------------convertion functions-------------------------*/
 
-void	ScalarConverter::convert(Type type, const std::string& str, char& c,
-int& i, float& f, double& d){
-	switch (type){
-		case Type::Char:
-			c = str[0];
-			i = static_cast<int>(c);
-			f = static_cast<float>(c);
-			d = static_cast<double>(c);
-			break ;
-		case Type::Int:
-			i = std::stoi(str);
-			c = static_cast<char>(i);
-			f = static_cast<float>(i);
-			d = static_cast<double>(i);
-			break ;
-		case Type::PseudoFloat:
-			f = std::stof(str);
-			d = static_cast<double>(f);
-			break ;
-		case Type::Float:
-			f = std::stof(str);
-			c = static_cast<char>(f);
-			i = static_cast<int>(f);
-			d = static_cast<double>(f);
-			break ;
-		case Type::PseudoDouble:
-			d = std::stod(str);
-			f = static_cast<float>(d);
-			break ;
-		case Type::Double:
-			d = std::stod(str);
-			c = static_cast<char>(d);
-			i = static_cast<int>(d);
-			f = static_cast<float>(d);
-			break ;
-		default:
-			std::cerr << "ScalarConverter::convert() error: unknow type\n";
+void	numConverter(double num, int overflowFlag){
+	switch (overflowFlag){
+		case 4: // float level overflow
+			std::cout << "char: " << "impossbile\n";
+			std::cout << "int: " << "impossbile\n";
+			std::cout << "float: " << "impossbile\n";
+			std::cout << std::fixed << std::setprecision(1);
+			std::cout << "double: " << num << "\n";
+			break;
+		case 2: // int level overflow
+			std::cout << "char: " << "impossbile\n";
+			std::cout << "int: " << "impossbile\n";
+			std::cout << std::fixed << std::setprecision(1);
+			std::cout << "float: " << static_cast<float>(num) << "f\n";
+			std::cout << "double: " << num << "\n";
+			break;
+		case 1: // char level overflow
+			std::cout << "char: " << "impossbile\n";
+			std::cout << "int: " << static_cast<int>(num) << "\n";
+			std::cout << std::fixed << std::setprecision(1);
+			std::cout << "float: " << static_cast<float>(num) << "f\n";
+			std::cout << "double: " << num << "\n";
+			break;
+		default: // no overflow
+			if (std::isprint(static_cast<unsigned char>(num))){
+				std::cout << "char: " << static_cast<char>(num) << "\n";
+			} else {
+				std::cout << "char: Not Displayable" << "\n";
+			}
+			std::cout << "int: " << static_cast<int>(num) << "\n";
+			std::cout << std::fixed << std::setprecision(1);
+			std::cout << "float: " << static_cast<float>(num) << "f\n";
+			std::cout << "double: " << num << "\n";
 	}
 }
 
-void	ScalarConverter::display(Type type, int overflowFlags, char c, int i,
-float f, double d){
-	// output char value
-	if (type == Type::PseudoFloat || type == Type::PseudoDouble || overflowFlags > 0){
-		std::cout << "char: impossible\n";
-	} else if (std::isprint(static_cast<unsigned int>(c))){
-		std::cout << "char: '" << c << "'\n";
-	} else {
-		std::cout << "char: Non displayable\n";
-	}
-
-	// output int value
-	if (type == Type::PseudoFloat || type == Type::PseudoDouble || overflowFlags > 1){
-		std::cout << "int: impossible\n";
-	} else {
-		std::cout << "int: " << i << "\n";
-	}
-
-	// output float value
-	std::cout << std::fixed << std::setprecision(1);
-	if (overflowFlags > 2){
-		std::cout << "float: impossible\n";
-	} else {
-		std::cout << "float: " << f << "\n";
-	}
-
-	// output double value
-	if (overflowFlags > 4){
-		std::cout << "double: impossible\n";
-	} else {
-		std::cout << "double: " << d << "\n";
+void	converter(Type type, const std::string& str,int overflowFlag){
+	double	num = std::stod(str);
+	switch (type){
+		case Type::PseudoFloat:
+			std::cout << "char: " << "impossbile\n";
+			std::cout << "int: " << "impossbile\n";
+			std::cout << "float: " << str << "\n";
+			std::cout << "double: " << str.substr(0, str.length() - 1) << "\n";
+			break ;
+		case Type::PseudoDouble:
+			std::cout << "char: " << "impossbile\n";
+			std::cout << "int: " << "impossbile\n";
+			std::cout << "float: " << str << "f\n";
+			std::cout << "double: " << str << "\n";
+			break ;
+		default:
+			numConverter(num, overflowFlag);
 	}
 }
 
@@ -300,7 +271,7 @@ void	ScalarConverter::convert(const std::string& str){
 		return ;
 	}
 	int	overflowFlag = 0;
-	Type	type = checkType(str, overflowFlag);
+	Type	type = checkType(str);
 
 	if (type == Type::Unknow){
 		std::cout << "char: " << "impossbile\n";
@@ -308,16 +279,48 @@ void	ScalarConverter::convert(const std::string& str){
 		std::cout << "float: " << "impossbile\n";
 		std::cout << "double: " << "impossbile\n";
 		return ;
-	}
-	char	c = 0;
-	int		i = 0;
-	float	f = 0.0;
-	double	d = 0.0;
-	try{
-		convert(type, str, c, i, f, d);
-	} catch (const std::exception& e){
-		std::cerr << "ScalarConverter::convert() error: " << e.what() << std::endl;
+	} else if (type == Type::Char){
+		std::cout << "char: '" << str[0] << "'\n";
+		std::cout << "int: " << static_cast<int>(str[0]) << "\n";
+		std::cout << "float: " << static_cast<float>(str[0]) << ".0f\n";
+		std::cout << "double: " << static_cast<double>(str[0]) << ".0\n";
 		return ;
 	}
-	display(type, overflowFlag, c, i, f, d);
+	overflowFlag = getOverflowInfo(str, type);
+	// if it is double level overflow, than it should be all impossbile
+	if (overflowFlag == 8){
+		std::cout << "char: " << "impossbile\n";
+		std::cout << "int: " << "impossbile\n";
+		std::cout << "float: " << "impossbile\n";
+		std::cout << "double: " << "impossbile\n";
+		return ;
+	}
+	converter(type, str, overflowFlag);
 }
+
+/*---------------------------For Testing----------------------------------*/
+// void	printType(Type& type){
+// 	std::cout << "Type=";
+// 	switch (type){
+// 		case Type::Char:
+// 			std::cout << "char\n";
+// 			break ;
+// 		case Type::Int:
+// 			std::cout << "int\n";
+// 			break ;
+// 		case Type::Float:
+// 			std::cout << "float\n";
+// 			break ;
+// 		case Type::Double:
+// 			std::cout << "double\n";
+// 			break ;
+// 		case Type::PseudoFloat:
+// 			std::cout << "pseudofloat\n";
+// 			break ;
+// 		case Type::PseudoDouble:
+// 			std::cout << "pseudodouble\n";
+// 			break ;
+// 		default:
+// 			std::cout << "invalid type\n";
+// 	}
+// }

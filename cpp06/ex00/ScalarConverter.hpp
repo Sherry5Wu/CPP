@@ -15,9 +15,9 @@
 #include <string>
 #include <iostream>
 #include <limits> // std::numeric_limits<char>::min, std::numeric_limits<char>::max
-#include <limits.h>
-#include <cmath>
-#include <cfloat>
+#include <limits.h> // CHAR_MIN, CHAR_MAX
+#include <cmath> // nextafter()
+#include <cfloat> // FLT_MAX
 #include <cstdlib> // stoi()
 #include <ios> // std::fixed
 #include <iomanip> // std::setprecision
@@ -55,27 +55,6 @@ class ScalarConverter{
 		ScalarConverter(const ScalarConverter& other);
 		~ScalarConverter();
 		ScalarConverter&	operator=(const ScalarConverter& other);
-
-		// static bool	charOverFlowed(int c);
-		static bool	isChar(const std::string& str);
-		static bool	isInt(const std::string& str, int& overflowFlag);
-		static bool	isFloat(const std::string& str, int& overflowFlag);
-		static bool	isDouble(const std::string& str, int& overflowFlag);
-		static bool	isPseudoFloat(const std::string& str);
-		static bool	isPseudoDouble(const std::string& str);
-
-		// static void	charConverter(const std::string& str);
-		// static void	intConverter(const std::string& str);
-		// static void	floatConverter(const std::string& str);
-		// static void	doubleConverter(const std::string& str);
-		// static void	pseudoFloatConverter(const std::string& str);
-		// static void	pesudoDoubleConverter(const std::string& str);
-
-		// static int	isOverflow(const double& num);
-		static bool	isOverflowCharType(int num);
-		// static void	printChar(const char& c, bool overflow);
-		static Type	checkType(const std::string& str, int& overflowFlag);
-		static void	convert(Type type, const std::string& str, char& c, int& i, float& f, double& d);
-		static void	display(Type type, int overflowFlags, char c, int i, float f, double d);
-		// static bool	isTheTypeOverflow(int overflowFlags, int overflowType);
 };
+
+// void	printType(Type& type);
