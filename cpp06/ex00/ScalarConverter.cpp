@@ -298,7 +298,7 @@ void	ScalarConverter::convert(const std::string& str){
 	converter(type, str, overflowFlag);
 }
 
-/*---------------------------For Testing----------------------------------*/
+/*---------------------------For Debugging----------------------------------*/
 // void	printType(Type& type){
 // 	std::cout << "Type=";
 // 	switch (type){

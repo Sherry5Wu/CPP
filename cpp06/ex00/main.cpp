@@ -61,9 +61,7 @@ static void	charTypeTesting(){
 	ScalarConverter::convert("M");
 	std::cout << std::endl;
 }
-#endif
 
-#if 1
 static void	intTypeTesting(){
 	printInColor("1. input: 0", PURPLE);
 	ScalarConverter::convert("0");
@@ -114,9 +112,7 @@ static void	intTypeTesting(){
 	ScalarConverter::convert("25a4");
 	std::cout << std::endl;
 }
-#endif
 
-#if 1
 static void	floatTypeTesting(){
 	printInColor("1. invalid input: 4.0.0f -- with two dots", PURPLE);
 	ScalarConverter::convert("4.0.0f");
@@ -170,9 +166,7 @@ static void	floatTypeTesting(){
 	ScalarConverter::convert("+inff");
 	std::cout << std::endl;
 }
-#endif
 
-#if 1
 static void	doubleTypeTesting(){
 	printInColor("1. invalid input: 4.0.0 -- with two dots", PURPLE);
 	ScalarConverter::convert("4.0.0");
@@ -222,7 +216,6 @@ static void	doubleTypeTesting(){
 	ScalarConverter::convert("2554121564813212312121524841231215248645123121121211.0");
 	std::cout << std::endl;
 }
-#endif
 
 int	main(){
 	printInColor("<---------Testing for char type---------->", GREEN);
@@ -238,7 +231,7 @@ int	main(){
 	doubleTypeTesting();
 	return 0;
 }
-
+#endif
 
 
 
