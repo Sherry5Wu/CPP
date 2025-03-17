@@ -1,3 +1,6 @@
+#include "whatever.hpp"
+#include <iostream>
+
 class Awesome
 {
   public:
