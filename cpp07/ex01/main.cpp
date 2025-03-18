@@ -33,24 +33,50 @@ void printElement(const T& elem) {
     std::cout << elem << " ";
 }
 
+static void arrayTypeTesting(){
+        printInColor("\n1. Test with int array", PURPLE);
+        int intArr[] = {1, 2, 3, 4, 5};
+        std::cout << "Int array: ";
+        iter(intArr, 5, printInt);
+
+        printInColor("\n2. Test with double array", PURPLE);
+        double doubleArr[] = {1.1, 2.2, 3.3, 4.4};
+        std::cout << "Double array: ";
+        iter(doubleArr, 4, printElement<double>);
+
+        printInColor("\n3. Test with char array", PURPLE);
+        char charArr[] = {'H', 'e', 'l', 'l', 'o'};
+        std::cout << "Char array: ";
+        iter(charArr, 5, printElement<char>);
+        std::cout << std::endl;
+}
+
+class Print{
+    public:
+        void    operator()(int x) const {std::cout << x << " ";}
+};
+
+static void functionTypeTesting(){
+    printInColor("\n1. Test with lambda function", PURPLE);
+    int arr[5] = {10, 11, 12 ,13 ,14};
+    std::cout << "array: ";
+    iter(arr, 5, [](int x){std::cout << x << " ";}); // lambda : [](parameter list) {function body}
+    std::cout << std::endl;
+
+    printInColor("\n2. Test with functor", PURPLE);
+    int arr1[5] = {10, 11, 12 ,13 ,14};
+    Print print;
+    iter(arr1, 5, print);
+    std::cout << std::endl;
+
+}
+
 int main() {
-    // Test with int array
-    int intArr[] = {1, 2, 3, 4, 5};
-    std::cout << "Int array: ";
-    iter(intArr, 5, printInt);
-    std::cout << std::endl;
+    printInColor("<------------Different array type Testing-------------->", GREEN);
+    arrayTypeTesting();
 
-    // Test with double array
-    double doubleArr[] = {1.1, 2.2, 3.3, 4.4};
-    std::cout << "Double array: ";
-    iter(doubleArr, 4, printElement<double>);
-    std::cout << std::endl;
-
-    // Test with char array
-    char charArr[] = {'H', 'e', 'l', 'l', 'o'};
-    std::cout << "Char array: ";
-    iter(charArr, 5, printElement<char>);
-    std::cout << std::endl;
+    printInColor("\n<------------Different function type Testing-------------->", GREEN);
+    functionTypeTesting();
 
     return 0;
 }
