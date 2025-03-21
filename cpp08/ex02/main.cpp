@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include "easyfind.hpp"
-#include <vector>
-#include <list>
-
+#include "MutantStack.hpp"
 
 #define RED "\033[0;31m"
 #define GREEN "\033[1;32m"
@@ -25,46 +22,76 @@ void	printInColor(const std::string&  msg, std::string color){
 	std::cout << color << msg << RESET << std::endl;
 }
 
-int main() {
-    std::vector<int> vec = {-1, 0, 1 , 2 , 3};
-    std::list<int>  lst = {100, 200, 3, 400, 500};
+#if 1
+static void fromSubject(){
+    MutantStack<int>
+    mstack;
+    mstack.push(5);
+    mstack.push(17);
+    std::cout << mstack.top() << std::endl;
+    mstack.pop();
+    std::cout << mstack.size() << std::endl;
+    mstack.push(3);
+    mstack.push(5);
+    mstack.push(737);
+    mstack.push(0);
+    MutantStack<int>::iterator it = mstack.begin();
+    MutantStack<int>::iterator ite = mstack.end();
+    ++it;
+    --it;
+    while (it != ite)
+    {
+    std::cout << *it << std::endl;
+    ++it;
+    }
+    // what this for?????
+    std::stack<int> s(mstack);
+}
+#endif
 
-    std::vector<int>::iterator  pVec = vec.begin();
-    std::list<int>::iterator    pLst = lst.begin();
-
-    std::cout << "The elements in Vecter are: ";
-    for (; pVec != vec.end(); pVec++){
-        std::cout << *pVec << ", ";
+static void loopStack(MutantStack<int> mstack){
+    std::cout << "Numbers in the stack: ";
+    for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end(); ++it) {
+        std::cout << *it << " ";
     }
     std::cout << std::endl;
+}
 
-    std::cout << "The elements in List are: ";
-    for (; pLst != lst.end(); pLst++){
-        std::cout << *pLst << ", ";
+
+#if 1
+static void selfTesting(){
+    MutantStack<int> mstack;
+
+    printInColor("\n1. Testing push function. Push 10, 20 ,30 ,40 into stack", PURPLE);
+    mstack.push(10);
+    mstack.push(20);
+    mstack.push(30);
+    mstack.push(40);
+    loopStack(mstack);
+
+    printInColor("\n2. Testing top function", PURPLE);
+    std::cout << "Number at the top stack: " << mstack.top() << std::endl;
+
+    printInColor("\n3. Testing pop function", PURPLE);
+    mstack.pop();
+    std::cout << "After popping one number of from stack, the top number is: " << mstack.top() << std::endl;
+
+    printInColor("\n4. Loop all the numbers using iterator", PURPLE);
+    loopStack(mstack);
+
+    printInColor("\n5. Reverse way to loop all the numbers using iterator", PURPLE);
+    for (MutantStack<int>::reverse_iterator rit = mstack.rbegin(); rit != mstack.rend(); ++rit) {
+        std::cout << *rit << " ";
     }
     std::cout << std::endl;
+}
+#endif
 
+int main(){
+    printInColor("<---------------------From Subject------------------------->", GREEN);
+    fromSubject();
 
-    printInColor("\n1. trying to find '3' in the vector", PURPLE);
-    // easyfind() return the iterator, *easyfind() will get the value
-    std::cout << "Found: " << *easyfind(vec, 3) << " is in the Vector\n";
-
-    printInColor("\n2. trying to find '20' in the vector", PURPLE);
-    try{
-        std::cout << *easyfind(vec, 20) << "is the Vector\n";
-    } catch (const std::runtime_error& e){
-        std::cout << e.what() << std::endl;
-    }
-
-    printInColor("\n3. trying to find '100' in the List", PURPLE);
-    std::cout << "Found: " << *easyfind(lst, 100) << " is in the Vector\n";
-
-    printInColor("\n4. trying to find '5' in the List", PURPLE);
-    try{
-        std::cout << *easyfind(lst, 5) << "is the Vector\n";
-    } catch (const std::runtime_error& e){
-        std::cout << e.what() << std::endl;
-    }
-
+    printInColor("<---------------------Self Testing------------------------->", GREEN);
+    selfTesting();
     return 0;
 }
