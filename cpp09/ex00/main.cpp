@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include <vector>
-#include <list>
+#include <map>
+#include "BitcoinExchange.hpp"
 
 
 #define RED "\033[0;31m"
@@ -20,12 +20,17 @@
 #define PURPLE "\033[2;35m"
 #define RESET "\033[0;0m"
 
-void	printInColor(const std::string&  msg, std::string color){
-	std::cout << color << msg << RESET << std::endl;
-}
+// void	printInColor(const std::string&  msg, std::string color){
+// 	std::cout << color << msg << RESET << std::endl;
+// }
 
-int main() {
+int main(int ac, char** av){
 
-
+	if (ac != 2){
+		std::cerr << "Usage: .btc <input_file>\n";
+		return 1;
+	}
+	BitcoinExchange	btc("data.csv");
+	btc.processInputFile(av[1]);
     return 0;
 }

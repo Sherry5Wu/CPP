@@ -27,9 +27,9 @@ void	printInColor(const std::string&  msg, std::string color){
 
 #if 1
 static void testFromSubject(){
-    Span sp = Span(5);
+    Span sp = Span(-5);
     printInColor("\n1.Add number '6, 3, 17, 9, 11' into sp", PURPLE);
-    sp.addNumber(6);
+    sp.addNumber(7);
     sp.addNumber(3);
     sp.addNumber(17);
     sp.addNumber(9);
@@ -49,7 +49,7 @@ static void selfTesing(){
     for (size_t i =0; i < bigNums.size(); i++){
         bigNums[i] = i;
     }
-    Span bigSp = Span(10000);
+    Span bigSp = Span(-10000);
     bigSp.addNumber(bigNums.begin(), bigNums.end());
     std::cout << "Shortest span is: " << bigSp.shortestSpan() << std::endl;
     std::cout << "Longest span is: " << bigSp.longestSpan() << std::endl;

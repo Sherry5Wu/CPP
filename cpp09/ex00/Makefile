@@ -1,8 +1,8 @@
-NAME := ex00
+NAME := btc
 COMPILER := c++
 FLAGS := -Wall -Wextra -Werror -std=c++11
 
-SRCS := main.cpp
+SRCS := main.cpp BitcoinExchange.cpp
 OBJS_DIR := objs
 
 OBJS = $(SRCS:.cpp=.o)

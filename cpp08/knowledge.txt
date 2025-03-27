@@ -33,3 +33,22 @@
 			std::set<int> st = {10, 20, 30};
 			auto it = st.lower_bound(15);  // 返回指向 20 的迭代器
 
+4. std::map
+  * insert element
+   
+   example: std::map<std::string, int> myMap
+   
+   1. using operator[]
+   	myMap["apple"] = 5;
+   2. use insert()
+   	myMap.insert(std::make_pair("banana", 10));
+   3. use emplace()
+   	myMap.emplace("cherry",15);
+   	
+   
+   * Accesssing elemet
+   1. myMap["apple"];
+   2. myMap.at("banana");
+   
+   If the key doesn't exist, the first way,it will get a defaul value;the second way,
+   	
