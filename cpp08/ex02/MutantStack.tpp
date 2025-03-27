@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:45:12 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/21 14:03:18 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/03/21 14:39:17 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,13 @@ template <typename T> MutantStack<T>::~MutantStack(){}
 
 /*----------------------------Iterator Functions-----------------------------*/
 
-// ?? why we need add "typename" before the return type??????
+/**
+ * why we need add "typename" before the return type?
+ * In C++, when dealing with dependent types inside template classes or 
+ * functions, we need to explicitly specify that something is a type (not a 
+ * variable or member) using the typename keyword. Without this, the compiler
+ * may be confused and interpret the name as something else.
+ */
 template <typename T> 
 typename MutantStack<T>::iterator	MutantStack<T>::begin(){
 	return this->c.begin();
