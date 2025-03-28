@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 14:17:10 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/27 14:50:53 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/03/28 08:07:20 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 Span::Span(): n_(0){}
 
-Span::Span(unsigned int n){
-	if (n < 0){
-		std::cout << "Error: invalid number\n";
-	}
-	n = n_;
-}
+Span::Span(unsigned int n): n_(n){}
 
 Span::Span(const Span& other) : n_(other.n_), numbers_(other.numbers_){}
 

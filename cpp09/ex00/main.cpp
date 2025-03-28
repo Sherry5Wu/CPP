@@ -30,7 +30,12 @@ int main(int ac, char** av){
 		std::cerr << "Usage: .btc <input_file>\n";
 		return 1;
 	}
-	BitcoinExchange	btc("data.csv");
-	btc.processInputFile(av[1]);
+	try{
+		BitcoinExchange	btc;
+		btc.importDB_("data.csv");
+		btc.exchange(av[1]);
+	} catch(){
+		??????????
+	}
     return 0;
 }

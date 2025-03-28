@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 08:00:44 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/27 13:48:58 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/03/28 14:46:25 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,93 +14,142 @@
 
 BitcoinExchange::BitcoinExchange(){}
 
-BitcoinExchange::BitcoinExchange(const std::string& filename){
-	std::ifstream file(filename);
-	if (!file.is_open()){
-		std::cerr << "Error: could not open database file.\n" << std::endl;
-		exit(1);
-	}
-
-	// read the file content into rateDB_ map
-	std::string line, date; // line for store each line's data
-	float	rate;
-	std::getline(file, line); // skip the header file
-	while (std::getline(file, line)){
-		
-		// std::istringstream -> chang string into stream, so we can read
-		// the string like reading from a file, to do extract, transform data
-		std::istringstream ss(line);
-		// get the content before ',' and saving into date
-		// ss >> rate, read the content after ',' and saving into rate
-		if (std::getline(ss, date, ',') && ss >> rate){
-			rateDB_[date] = rate; // mapping date and rate
-		}
-	}
-	file.close();
-}
-
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& o):rateDB_(o.rateDB_){}
-
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& o){
-	if (this != &o){
-		rateDB_ = o.rateDB_;
-	}
-	return *this;
-}
-
 BitcoinExchange::~BitcoinExchange(){}
 
-float	BitcoinExchange::getExchangeRate(const std::string& date) const{
-	// lower_bound(): to find a key that equal or greater than the given key
-	auto	it = rateDB_.lower_bound(date);
+void	BitcoinExchange::importDB_(const std::string& fileName){
+	std::string	line, date_str, rate_str;
+	float	rate;
 
-	if (it == rateDB_.end() || it->first != date){
-		if (it == rateDB_.begin()){
-			return -1; // no earlier date available
-		}
-		it--;
+	std::ifstream	file(fileName);
+	if (!file.is_open()){
+		throw (std::runtime_error("Error: failed to open " + fileName));
 	}
-	// std::cout << "Used date: " << it->first << std::endl; // for debugging
-	return it->second;
+	if (file.peek() == std::ifstream::traits_type::eof()){
+		throw (std::runtime_error(fileName + " is empty"));
+	}
+	std::getline(file, line); // skip the first line
+	while(std::getline(file, line)){
+		
+		try{
+			tie(date_str, rate_str) = BitcoinExchange::lineSplit(line, ",");
+			parsingDate(date_str);
+			rate = parsingValue(rate_str, false);
+			rateDB_.insert(std::make_pair(date_str, rate));
+		} catch (const std::exception& e){
+			std::cerr << e.what() << std::endl;
+		}
+	}
+}
+
+std::tuple<std::string, std::string> BitcoinExchange::lineSplit(std::string line, std::string del){
+	std::string left, right;
+	size_t	del_pos;
+
+	if (line.empty()){
+		throw(std::runtime_error("Error: empty line"));
+	}
+	del_pos = line.find(del);
+	if (del_pos == std::string::npos){
+		throw(std::runtime_error("Error: line format is wrong. \"" + line + "\""));
+	}
+
+	// split date and rate by delimeter
+	left = line.substr(0, del_pos);
+	del_pos += del.length();
+	right = line.substr(del_pos, line.length() - del_pos);
+	if (left.empty() || right.empty()){
+		throw(std::runtime_error("Error: line format is wrong. \"" + line + "\""));
+	}
+	return std::make_tuple(left, right);
+}
+
+bool	BitcoinExchange::isLeapYear(int year){
+	return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
 }
 
 /**
- *  What if the input date is like yyyy-mm-d or yyyy-m-dd,???????
+ *  @brief the logic to parse the date
+ *  1. checking if the date following the correct format;
+ *  2. checking if any number overflow;
+ *  3. checking if month and day in the correct range;
+ *
+ * Regex pattern:
+ * 	1. \d{4}-\d{2}-\d{2};
+ *  2. \d{4}-\d{1,2}-\d{1,2}:  \d{1,2}: Matches 1 or 2 digits for the month and day.
+ *  3. \d{2}-[A-Za-z]{3}-\d{4}: A-Za-z]{3}: Matches exactly 3 alphabetic characters
+ *                              for the month abbreviation (case insensitive)
+ *  4. \d{2}-[A-Za-z]+-\d{4}: [A-Za-z]+: Matches one or more alphabetic characters
+ *                            for the full month name (case insensitive).
+ *
+ * std::smatch : saving the matched result
+ * 
+ *
  */
+void	BitcoinExchange::parsingDate(std::string& dateStr){
+	// checking the format :YYYY-MM-DD
+	// "\d{4}" : meaning 4 digits
+	std::regex format(R"(\d{4}-\d{2}-\d{2})");
+	std::smatch	result;
 
-void	BitcoinExchange::processInputFile(const std::string& inputFile) const{
-	std::ifstream file(inputFile);
-	if (!file.is_open()){
-		std::cerr << "Error: could not open database file.\n" << std::endl;
-		exit(1);
+	if (!std::regex_match(dateStr, result, format)){
+		throw(std::runtime_error("Error: format is wrong => " + dateStr)); // the date format is wrong
 	}
+	
+	int	year, month, day;
+	try{
+		year = std::stoi(result[1].str());
+		month = std::stoi(result[2].str());
+		day = std::stoi(result[3].str());
+	} catch (const std::overflow_error& e){
+		std::cout << "Error: bad input => " << dateStr << std::endl;
+	}
+	
+	int	daysIMonth[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (month == 2 && isLeapYear(year)){
+		daysIMonth[1] = 29;
+	}
+	// checking month is between 1~12, and day in the range
+	if ((month < 1 || month > 12) || (day < 1 || day > daysIMonth[month - 1])){
+		throw(std::runtime_error("Error: bad input => " + dateStr));
+	}
+}
 
-	std::string line, date;
-	float value;
-	std::getline(file, line); // skip the header file
-
-	while (std::getline(file, line)){
-		std::istringstream ss(line);
-		if (std::getline(ss, date, '|') && ss >> value){
-			date.erase(date.find_last_not_of(" ") + 1); // trim space
-
-			if (value < 0){
-				std::cerr << "Error: not a positive number." << std::endl;
-				continue;
-			}
-			if (value > 1000){
-				std::cerr << "Error: too large a number." << std::endl;
-				continue;
-			}
-			float rate = getExchangeRate(date);
-			if (rate == -1){
-				std::cerr << "Error: no histroical data for " << date << std::endl;
-				continue;
-			}
-			std::cout << date << " => " << value << " = " << value * rate << std::endl;
-		} else {
-			std::cerr << "Error: bad input => " << line << std::endl;
+/**
+ * @brief Checking for the rate if it is in the corret range. This function will check
+ *  for both input files: data.csv and input.txt.
+ * 
+ *  For data.csv, the rate should be a valid postive float number.
+ *  For input.txt, the value should be between 0 ~ 1000.
+ * 
+ * @param str_value: the string type of value which needs to be parsed;
+ *  isSmallRange: 
+ *     true, degsin for checking input.txt, because the rate should be between 0 ~ 1000;
+ *     false, for checking data.csv file, the rate should be a valid positive float number
+ *  
+ * 
+ */
+float	BitcoinExchange::parsingValue(std::string& str_value, bool isSmallRange){
+	float num;
+	size_t	pos;
+	try{
+		num = std::stof(str_value, &pos);
+		if (pos != str_value.length()){
+			throw (std::runtime_error("Error: value contains invalid characters => " + str_value));
 		}
+		if (num < 0){
+			throw (std::runtime_error("Error: not a postive number"));
+		}
+		if (isSmallRange && num > 1000){
+			throw (std::runtime_error("Error: too large a number"));
+		}
+		return num;
+	} catch (const std::overflow_error& e){
+		std::cerr << "Error: value overflow => " << str_value << std::endl;
 	}
-	file.close();
+}
+
+void	BitcoinExchange::outputRate();
+
+void	BitcoinExchange::getPrice(const char* inputFileName){
+
 }

@@ -27,19 +27,25 @@ void	printInColor(const std::string&  msg, std::string color){
 
 #if 1
 static void testFromSubject(){
-    Span sp = Span(-5);
-    printInColor("\n1.Add number '6, 3, 17, 9, 11' into sp", PURPLE);
-    sp.addNumber(7);
-    sp.addNumber(3);
-    sp.addNumber(17);
-    sp.addNumber(9);
-    sp.addNumber(11);
-    sp.printNumbers();
-    std::cout << std::endl;
-    std::cout << "Shortest span is: " << sp.shortestSpan() << std::endl;
-    sp.printShortestSpanNumbers();
-    std::cout << "Longest span is: " << sp.longestSpan() << std::endl;
-    sp.printLongestSpanNumbers();
+    try{
+        Span sp = Span(5);
+        printInColor("\n1.Add number '6, 3, 17, 9, 11' into sp", PURPLE);
+        sp.addNumber(7);
+        sp.addNumber(3);
+        sp.addNumber(17);
+        sp.addNumber(9);
+        sp.addNumber(11);
+        sp.printNumbers();
+        std::cout << std::endl;
+        std::cout << "Shortest span is: " << sp.shortestSpan() << std::endl;
+        sp.printShortestSpanNumbers();
+        std::cout << "Longest span is: " << sp.longestSpan() << std::endl;
+        sp.printLongestSpanNumbers();
+    } catch(const std::overflow_error& e){
+        std::cout << e.what() << std::endl;
+    } catch (const std::invalid_argument& e){
+        std::cout << e.what() << std::endl;
+    }
 }
 
 
@@ -49,11 +55,17 @@ static void selfTesing(){
     for (size_t i =0; i < bigNums.size(); i++){
         bigNums[i] = i;
     }
-    Span bigSp = Span(-10000);
-    bigSp.addNumber(bigNums.begin(), bigNums.end());
-    std::cout << "Shortest span is: " << bigSp.shortestSpan() << std::endl;
-    std::cout << "Longest span is: " << bigSp.longestSpan() << std::endl;
-    bigSp.printLongestSpanNumbers();
+    try{
+        Span bigSp = Span(10000);
+        bigSp.addNumber(bigNums.begin(), bigNums.end());
+        std::cout << "Shortest span is: " << bigSp.shortestSpan() << std::endl;
+        std::cout << "Longest span is: " << bigSp.longestSpan() << std::endl;
+        bigSp.printLongestSpanNumbers();
+    } catch (const std::overflow_error& e){
+        std::cout << e.what() << std::endl;
+    } catch (const std::invalid_argument& e){
+        std::cout << e.what() << std::endl;
+    }
 }
 #endif
 
@@ -81,6 +93,8 @@ static void negativeTesting(){
         sp.addNumber(0);
     } catch (const std::overflow_error& e){
         std::cout << e.what() << std::endl;
+    }catch (const std::invalid_argument& e){
+        std::cout << e.what() << std::endl;
     }
 
     printInColor("\n6. Trying to add bigger range than Span's limit", PURPLE);
@@ -92,6 +106,19 @@ static void negativeTesting(){
         Span sp(199);
         sp.addNumber(bigNums.begin(), bigNums.end());
     } catch (const std::overflow_error& e){
+        std::cout << e.what() << std::endl;
+    }catch (const std::invalid_argument& e){
+        std::cout << e.what() << std::endl;
+    }
+
+    printInColor("\n7. Passing a negative number", PURPLE);
+    try {
+        Span sp(-10);
+        sp.addNumber(1);
+        sp.printNumbers();
+    } catch (const std::overflow_error& e){
+        std::cout << e.what() << std::endl;
+    }catch (const std::invalid_argument& e){
         std::cout << e.what() << std::endl;
     }
 }
