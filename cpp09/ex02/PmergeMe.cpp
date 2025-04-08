@@ -6,11 +6,12 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:32:20 by jingwu            #+#    #+#             */
-/*   Updated: 2025/04/08 11:03:31 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/04/08 15:51:10 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <cmath>
 
 
 PmergeMe::PmergeMe(){}
@@ -121,17 +122,60 @@ PmergeMe::mergeSort(T& con){
     // Step 2: recursivly sort A
     PmergeMe::mergeSort(A);
 
-    // Step 3: Insert the elements in group B into the sorted A.
-    // Here, binary search is used for insertion to simulate the effect of
-    // optimized insertion
-    for (int num : B){
-        binaryInsert(A, num);
+    // Step3: get the insert order array
+    std::vector<size_t> insertionOrder = generateJacobsthalOrder(B.size());
+
+
+    // Step 4: Insert the elements in group B into the sorted A.
+    for (size_t idx : insertionOrder){
+        if (idx < B.size()){
+            binaryInsert(A, B[idx]);
+        }
     }
 
     // Assign the sorted A back to the original array
     con = A;
 }
 
+/**
+ * @brief Generates an insertion order based on the size of group B using the
+ * properties of the Jacobsthal sequence.
+ * 
+ * Algorithm idea:
+ * 1. Generate Jacobsthal numbers using the closed-form expression J(n) = (2^n - (-1)^n) / 3,
+ *    until J(n) >= the size of group B.
+ * 2. Use these values to create an index sequence (note: indexing starts from 0).
+ * 3. To simplify the explanation, we first use the Jacobsthal numbers as candidate indices,
+ *    then fill in any remaining unselected indices in sequential order.
+ *
+ * @param bSize The number of elements in group B.
+ * @return std::vector<size_t> The insertion order as an index sequence.
+ */
+std::vector<size_t> PmergeMe::generateJacobsthalOrder(size_t bSize){
+    std::vector<size_t> order;
+    std::vector<bool> used(bSize, false);
+    // generate Jacobsthal numbers as more as possbile(but the index
+    // can't greater than bsize)
+    size_t n = 1;
+    while (true) {
+        // calculate J(n) = (2^n - (-1)^n) / 3
+        size_t j = (static_cast<size_t>(std::pow(2.0, n)) - (n % 2 == 0 ? 1 : -1) ) / 3;
+        if (j >= bSize) break;
+        if (!used[j]) {
+            order.push_back(j);
+            used[j] = true;
+        }
+        n++;
+    }
+    // Complete the remaining unselected subscripts in sequence to ensure that
+    // all elements can be inserted
+    for (size_t i = 0; i < bSize; ++i) {
+        if (!used[i]) {
+            order.push_back(i);
+        }
+    }
+    return order;
+}
 
 /**
  * @brief based on the binary search

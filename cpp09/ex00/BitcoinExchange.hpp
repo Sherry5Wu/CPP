@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 08:00:39 by jingwu            #+#    #+#             */
-/*   Updated: 2025/04/08 10:21:58 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/04/08 13:45:11 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <fstream> // for std::ifstream
 #include <sstream> // for std::istringstream
 #include <regex> // stand for regular expressions, for std::regex
+// #include <cmath> // for pow()
 
 class BitcoinExchange{
 	public:
