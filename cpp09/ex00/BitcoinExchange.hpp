@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 08:00:39 by jingwu            #+#    #+#             */
-/*   Updated: 2025/03/28 13:02:57 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/04/08 10:21:58 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ class BitcoinExchange{
 
 		BitcoinExchange(const BitcoinExchange&);
 		BitcoinExchange& operator=(const BitcoinExchange&);
-		
-		static std::tuple<std::string, std::string> lineSplit(std::string line, std::string del);
-		static void	parsingDate(std::string& dateStr);
-		static float	parsingValue(std::string& str_value, bool to_exchange);
-		static bool	isLeapYear(int year);
-		// void	outputRate();
+
+		std::tuple<std::string, std::string> lineSplit(std::string line, std::string del);
+		bool	checkingLineFormat(const std::string& line, bool matchingForInput);
+		bool	parsingDate(std::string& dateStr);
+		float	parsingValue(std::string& str_value, bool to_exchange);
+		bool	isLeapYear(int year);
 };
