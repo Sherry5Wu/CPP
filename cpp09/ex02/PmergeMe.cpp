@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:32:20 by jingwu            #+#    #+#             */
-/*   Updated: 2025/04/08 10:15:38 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/04/08 11:03:31 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,10 @@ PmergeMe::mergeSort(T& con){
     con = A;
 }
 
+
+/**
+ * @brief based on the binary search
+ */
 // define like this is for limited the container just can be vector and deque
 template<typename T>
 typename std::enable_if<
@@ -140,10 +144,14 @@ typename std::enable_if<
     void
     >::type
 PmergeMe::binaryInsert(T& con, int num){
+    // start from the beging of the container
     int left = 0;
+    // end at the end of the contatiner
     int right = con.size();
 
+    // if (left < right) means there are still elements we can search
     while (left < right){
+        // find the middle position
         int mid = left + (right - left) / 2;
         if (num < con[mid]){
             right = mid;
@@ -151,6 +159,7 @@ PmergeMe::binaryInsert(T& con, int num){
             left = mid + 1;
         }
     }
+    // the left location is the location we should insert num.
     con.insert(con.begin() + left, num);
 }
 
